@@ -20,6 +20,8 @@ A estrutura de pasta ficou dividida da seguinte forma:
 - `modelo-antigo`: estrutura contendo as configurações necessária para executar o script original dentro de um container;
 - `modelo-geração-dados`: estrutura contendo o script para gerar mais dados;
 
+Você pode verificar o trabalho no repositório: https://github.com/BrunoHoffmann15/trabalho-big-data-gb-2
+
 ## Comparativo de Execuções
 Um dos objetivos do nosso trabalho era fazer um comparativo entre a execução em um container simples (simulando uma máquina) e um cluster de containers (simulando o ambiente spark). Para o caso do ambiente spark foram utilizados 7 containers workers, 1 container master e 1 container history. A partir disso, foi executado ambos os casos, e verificado as seguintes métrica:
 
