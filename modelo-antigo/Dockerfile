@@ -1,4 +1,3 @@
-# Usa uma imagem base do Python
 FROM python:3.10-slim
 
 # Define o diretório de trabalho dentro do container
@@ -13,7 +12,7 @@ RUN pip install -r requirements.txt
 # Copia o código da aplicação para o container
 COPY . .
 
-# Expõe a porta usada pela aplicação (se aplicável)
+# Expõe a porta usada pela aplicação
 EXPOSE 5000
 
 # Comando para rodar a aplicação e redirecionar logs
