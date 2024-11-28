@@ -13,7 +13,7 @@ docker build . -t da-spark-image
 Execute o comando abaixo, contendo a quantidade de workers que você deseja para realizar a operação. Assim, será criado o ambiente.
 
 ```sh
-docker-compose up --scale spark-worker=3
+docker-compose up --scale spark-worker=7
 ```
 
 A partir disso é possível executar a UI do master, com as informações dos workers:
@@ -28,9 +28,9 @@ Também é possível verificar a UI de logs:
 http://localhost:18080/
 ```
 
-Para rodar o treinamento:
+Para rodar o treinamento e armazenar o output em um arquivo:
 ```sh
-docker exec da-spark-master spark-submit --master spark://spark-master:7077 --deploy-mode client ./apps/train_script.py
+docker exec da-spark-master spark-submit --master spark://spark-master:7077 --deploy-mode client ./apps/train_script.py >> output.txt
 ```
 
 ## Referências
