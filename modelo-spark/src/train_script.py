@@ -31,22 +31,27 @@ def train_data() -> None:
     ])
 
     # Importa os dados csv
-    patients_data = spark.read.csv('./data/The_Cancer_data_1500_V2.csv', header=True, schema=schema)
+    patients_data = spark.read.csv('./data/The_Cancer_data_Generated.csv', header=True, schema=schema)
 
     # Define features e classe
     features_one_hot_encoder = 'GeneticRisk'
-    features = ['Age', 'Gender', 'BMI', 'Smoking', 'PhysicalActivity', 'AlcoholIntake', 'CancerHistory', 'GeneticRisk_encoded']
+    features = ['Age', 'Gender', 'BMI', 'Smoking', 'PhysicalActivity', 
+                'AlcoholIntake', 'CancerHistory', 'GeneticRisk_encoded']
 
     # Realiza OneHotEncoder
-    one_hot_encoder = OneHotEncoder(inputCol=features_one_hot_encoder, outputCol="GeneticRisk_encoded")
+    one_hot_encoder = OneHotEncoder(inputCol=features_one_hot_encoder, 
+                                    outputCol="GeneticRisk_encoded")
+    
     encoded_data = one_hot_encoder.fit(patients_data).transform(patients_data)
 
     # Vetoriza as features
-    assembler = VectorAssembler(inputCols=features, outputCol="features") 
+    assembler = VectorAssembler(inputCols=features, 
+                                outputCol="features") 
     assembled_df = assembler.transform(encoded_data)
 
     # Escalonamento dos dados
-    standardScaler = StandardScaler(inputCol="features", outputCol="features_scaled")
+    standardScaler = StandardScaler(inputCol="features", 
+                                    outputCol="features_scaled")
     scaled_df = standardScaler.fit(assembled_df).transform(assembled_df)
 
     # Dividindo o dataset entre treino e teste.
@@ -61,14 +66,12 @@ def train_data() -> None:
     print("Começando treinamento.")
 
     start_time_train_data = time.time()
-    rf_classifier = RandomForestClassifier(featuresCol="features_scaled", labelCol="Diagnosis", numTrees=100)
+    rf_classifier = RandomForestClassifier(featuresCol="features_scaled", 
+                                           labelCol="Diagnosis", numTrees=300)
     model = rf_classifier.fit(train_patients_data)
     end_time_train_data = time.time()
     
     print(f"Treinamento finalizado, tempo de espera: {end_time_train_data - start_time_train_data} segundos.")
-
-    # Salvando o modelo
-    model.write().overwrite().save("./data/trained_random_forest_spark")
 
     # Avaliação do modelo
     print("Executando modelo sobre os dados de testes")
