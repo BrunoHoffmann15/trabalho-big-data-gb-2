@@ -89,7 +89,7 @@ def train_data() -> None:
     f1_score = evaluator.evaluate(classifications, {evaluator.metricName: "f1"})
     end_time_metrics_data = time.time()
 
-    print(f"Métricas verificadas, tempo de espera: {end_time_metrics_data - start_time_metrics_data}")
+    print(f"Métricas verificadas, tempo de espera: {end_time_metrics_data - start_time_metrics_data} segundos.")
     print(f"Accuracy: {accuracy}")
     print(f"Precision: {precision}")
     print(f"Recall: {recall}")
