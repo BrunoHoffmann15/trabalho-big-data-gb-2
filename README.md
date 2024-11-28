@@ -28,6 +28,11 @@ Também é possível verificar a UI de logs:
 http://localhost:18080/
 ```
 
+Para rodar o treinamento:
+```sh
+docker exec da-spark-master spark-submit --master spark://spark-master:7077 --deploy-mode client ./apps/train_script.py
+```
+
 ## Referências
 
 https://www.youtube.com/watch?v=FteThJ-YvXk
